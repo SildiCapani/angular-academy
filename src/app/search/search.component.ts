@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Subject } from 'rxjs';
+import { SearchService } from '../services/search/search.service';
 
 @Component({
   selector: 'app-search',
@@ -9,17 +10,13 @@ import { Subject } from 'rxjs';
 
 export class SearchComponent {
 
-  search: string;
-  search$: Subject<string>;
+  search: string = '';
 
-  constructor() {
-    this.search = '';
-    this.search$ = new Subject<string>();
-  }
 
-  onSearch(search: string): void {
-    this.search = search;
-    this.search$.next(this.search);
+  constructor(private searchService: SearchService) {}
+
+    onSearch(): void {
+    this.searchService.setSearch(this.search)
   }
 
 }

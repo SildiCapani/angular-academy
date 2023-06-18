@@ -3,6 +3,7 @@ import { Item } from '../shared/models/Item';
 import { ItemService } from '../services/Item/item.service';
 import { ActivatedRoute } from '@angular/router';
 import { map, Subject } from 'rxjs';
+import { SearchService } from '../services/search/search.service';
 
 @Component({
   selector: 'app-home',
@@ -14,20 +15,26 @@ import { map, Subject } from 'rxjs';
 export class HomeComponent implements OnInit {
 
   items: Item[] = [];
-  search: string;
-  search$: Subject<string>;
 
-  constructor(private itemService: ItemService, private route: ActivatedRoute) {
-    this.search = '';
-    this.search$ = new Subject<string>();
+  constructor(private itemService: ItemService, private searchService: SearchService) {
+
   }
   
   getItemData(): void {
-    this.itemService.getItems(this.search).subscribe(items => this.items = items)
+    this.itemService.getItems()
+    .subscribe(items => this.items = items)
   }
 
   ngOnInit(): void {
-    this.getItemData();
+    this.searchService.search$.subscribe(search => {
+      if (search) {
+        this.itemService.getItems().subscribe(items => {
+          this.items = items.filter(item => item.name.toLowerCase().includes(search.toLowerCase()));
+        });
+      } else {
+        this.getItemData();
+      }
+    });
   }
 
 }
