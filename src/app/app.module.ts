@@ -8,6 +8,8 @@ import { HeaderComponent } from './header/header.component';
 import { ItemComponent } from './item/item.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { SearchComponent } from './search/search.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,11 +19,13 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     ItemComponent,
     HomeComponent,
     PageNotFoundComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -7,7 +7,6 @@
           "price": 10,
           "favorite": false,
           "origins": ["italy"],
-          "stars": 4.5,
           "imageUrl": "/assets/images/food-1.jpg",
           "tags": ["FastFood", "Pizza", "Lunch"]
         },
@@ -18,7 +17,6 @@
           "cookTime": "20-30",
           "favorite": true,
           "origins": ["persia", "middle east", "china"],
-          "stars": 4.7,
           "imageUrl": "/assets/images/food-2.jpg",
           "tags": ["SlowFood", "Lunch"]
         },
@@ -29,7 +27,6 @@
           "cookTime": "10-15",
           "favorite": false,
           "origins": ["germany", "us"],
-          "stars": 3.5,
           "imageUrl": "/assets/images/food-3.jpg",
           "tags": ["FastFood", "Hamburger"]
         },
@@ -40,7 +37,6 @@
           "cookTime": "15-20",
           "favorite": true,
           "origins": ["belgium", "france"],
-          "stars": 3.3,
           "imageUrl": "/assets/images/food-4.jpg",
           "tags": ["FastFood", "Fry"]
         },
@@ -51,7 +47,6 @@
           "cookTime": "40-50",
           "favorite": false,
           "origins": ["india", "asia"],
-          "stars": 3.0,
           "imageUrl": "/assets/images/food-5.jpg",
           "tags": ["SlowFood", "Soup"]
         },
@@ -62,7 +57,6 @@
           "cookTime": "40-50",
           "favorite": false,
           "origins": ["italy"],
-          "stars": 4.0,
           "imageUrl": "/assets/images/food-6.jpg",
           "tags": ["FastFood", "Pizza", "Lunch"]
         }

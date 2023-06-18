@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Item } from 'src/app/shared/models/Item';
@@ -19,8 +19,14 @@ export class ItemService {
     this.itemUrl = `${this.url}/items`
    }
 
-  getItems():  Observable<Item[]> {
-    return this.httpClient.get<Item[]>(this.itemUrl)
+  getItems(search: string):  Observable<Item[]> {
+
+    const params: HttpParams = new HttpParams().set(
+      'q',
+      search
+    );
+
+    return this.httpClient.get<Item[]>(this.itemUrl, { params })
   }
 
 }
