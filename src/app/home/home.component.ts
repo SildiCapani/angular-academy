@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from '../shared/models/Item';
 import { ItemService } from '../services/Item/item.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime, map, Subject } from 'rxjs';
 import { SearchService } from '../services/search/search.service';
+import { CartService } from '../services/cart/cart.service';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,8 @@ export class HomeComponent implements OnInit {
 
   items: Item[] = [];
 
-  constructor(private itemService: ItemService, private searchService: SearchService, private route: ActivatedRoute) {
+
+  constructor(private itemService: ItemService, private searchService: SearchService, private route: ActivatedRoute,private cartService: CartService, private router: Router) {
 
   }
   
@@ -25,7 +27,7 @@ export class HomeComponent implements OnInit {
     .subscribe(items => this.items = items)
   }
 
-  ngOnInit(): void {
+  getSearchItem(): void {
     this.searchService.search$
     .pipe(debounceTime(500))
     .subscribe(search => {
@@ -46,6 +48,16 @@ export class HomeComponent implements OnInit {
         }
       })
     });
+  }
+
+  addToCart(item: Item): void {
+    this.cartService.addToCart(item);
+    this.router.navigateByUrl('/cart-page')
+  }
+  
+
+  ngOnInit(): void {
+    this.getSearchItem();
   }
 
 }

@@ -21,9 +21,23 @@ ul{
 
         &:hover{
             opacity: 0.9;
-            cursor: pointer;
         }
 
+        }
+    }
+
+    .add-cart{
+        color: grey;
+        font-size: .9rem;
+        border-radius: 1rem;
+        border: none;
+        background-color: #e72929;
+        color: white;
+        opacity: .8;
+        outline: none;
+    
+        &:hover{
+            cursor: pointer;
         }
     }
 }

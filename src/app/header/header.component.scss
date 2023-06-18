@@ -5,31 +5,56 @@ header{
 }
 
 a{
-    color:#af1313
-}
+    color:#af1313;
+   
 
-a:hover{
+    &:hover{
     background: #e72929;
     color: white;
-}
+
+    span{
+      background: #ff4d4d;
+      color: white;
+      padding: 0.1rem 0.45rem;
+      border-radius: 100rem;
+      font-size:0.9rem;
+    }
+}}
 
 .container{
     margin: 0 auto;
     display: flex;
-    justify-content:space-between;
-}
-
-a.logo{
-    font-weight: bold;
-    padding: 1em;
+    justify-content:center;
 }
 
 nav ul{
+    display: flex;
     list-style-type: none;
     margin: 0;
+ 
+    li a {
+    padding: 1em;
+    display: flex;
 }
 
-nav ul li a {
-    padding: 1em;
-    display: inline-block;
 }
+
+.menu-container{
+    position: relative;
+  }
+  
+  .menu{
+    position:absolute;
+    z-index:1;
+    background:whitesmoke;
+    display: none;
+  }
+  
+  .menu-container:hover .menu{
+    display: block;
+  }
+  
+  .menu a{
+    width: 100%;
+    min-width:8rem;
+  }

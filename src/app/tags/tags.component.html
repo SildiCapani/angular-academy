@@ -1,1 +1,4 @@
-<p>tags works!</p>
+<div>
+    <a  (click)="reloadPage()" routerLink="/home">All</a>
+    <a *ngFor="let tag of uniqueTags" routerLink="/tag/{{tag}}">{{ tag }}</a>
+</div>

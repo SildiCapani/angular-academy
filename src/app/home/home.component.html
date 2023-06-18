@@ -25,6 +25,9 @@
                 <div class="price">
                     {{item.price | currency}}
                 </div>
+                <div >
+                    <button class="add-cart" (click)="addToCart(item)">Add to cart</button>
+                </div>
             </div>
         </a>
     </li>
