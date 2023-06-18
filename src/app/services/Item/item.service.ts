@@ -19,14 +19,8 @@ export class ItemService {
     this.itemUrl = `${this.url}/items`
    }
 
-  getItems(search: string):  Observable<Item[]> {
-
-    const params: HttpParams = new HttpParams().set(
-      'q',
-      search
-    );
-
-    return this.httpClient.get<Item[]>(this.itemUrl, { params })
+  getItems():  Observable<Item[]> {
+    return this.httpClient.get<Item[]>(this.itemUrl)
   }
 
 }

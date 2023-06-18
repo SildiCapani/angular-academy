@@ -1,4 +1,3 @@
 <div>
-    <input type="text" [(ngModel)]="search" placeholder="Search...">
-    <button (click)="onSearch()">Search</button>
+    <input type="text" [(ngModel)]="search" (ngModelChange)="onSearch()" placeholder="Search...">
   </div>
