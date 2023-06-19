@@ -87,3 +87,29 @@ ul{
     color:#414141;
     margin-top: .7rem;
 }
+
+.nothing-found{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 1.5rem;
+    font-weight: 100;
+    height: 15rem;
+
+    a{
+        font-size: 1.1rem;
+        background-color: #e72929;
+        color: white;
+        border-radius: 10rem;
+        padding: 0.7rem 1rem;
+        margin: 1rem;
+        opacity: 0.8;
+      
+      
+      &:hover{
+        opacity: 1;
+        cursor: pointer;
+      }
+    }
+}

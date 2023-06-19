@@ -16,10 +16,11 @@ import { CartService } from '../services/cart/cart.service';
 export class HomeComponent implements OnInit {
 
   items: Item[] = [];
+  nothingFound: boolean = false;
 
 
   constructor(private itemService: ItemService, private searchService: SearchService, private route: ActivatedRoute,private cartService: CartService, private router: Router) {
-
+  
   }
   
   getItemData(): void {
@@ -34,7 +35,7 @@ export class HomeComponent implements OnInit {
       if (search) {
         this.itemService.getItems().subscribe(items => {
           this.items = items.filter(item => item.name.toLowerCase().includes(search.toLowerCase()));
-
+          this.items.length == 0? this.nothingFound = true : this.nothingFound = false; console.log(this.nothingFound)
         });
       } else {
         this.getItemData();
@@ -58,6 +59,11 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSearchItem();
+    setTimeout(() => {
+      if(!this.items){
+        this.nothingFound = true
+      } console.log(this.items)
+    }, 1000);
   }
 
 }

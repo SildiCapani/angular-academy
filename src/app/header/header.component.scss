@@ -11,15 +11,16 @@ a{
     &:hover{
     background: #e72929;
     color: white;
+  }
 
-    span{
-      background: #ff4d4d;
-      color: white;
-      padding: 0.1rem 0.45rem;
-      border-radius: 100rem;
-      font-size:0.9rem;
-    }
-}}
+  span{
+    background: #ff4d4d;
+    color: white;
+    padding: 0.1rem 0.45rem;
+    border-radius: 100rem;
+    font-size:0.9rem;
+  }
+}
 
 .container{
     margin: 0 auto;
