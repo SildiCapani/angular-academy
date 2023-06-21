@@ -16,10 +16,11 @@ export class ItemService {
 
   constructor(private httpClient: HttpClient) {
     this.url = `${environment.baseUrl}`
-    this.itemUrl = `${this.url}/items`
+    this.itemUrl = `${this.url}/api/items`
    }
 
-  getItems():  Observable<Item[]> {
+  getItems(search?: string):  Observable<Item[]> {
+    
     return this.httpClient.get<Item[]>(this.itemUrl)
   }
 

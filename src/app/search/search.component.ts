@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Subject } from 'rxjs';
 import { SearchService } from '../services/search/search.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -13,10 +14,17 @@ export class SearchComponent {
   search: string = '';
 
 
-  constructor(private searchService: SearchService) {}
+  constructor(private searchService: SearchService, private router: Router) {}
 
-    onSearch(): void {
-    this.searchService.setSearch(this.search)
+    onSearch(event: Event): void {
+    this.searchService.setSearch(this.search);
+
+    const { target } = event;
+    const { value } = target as HTMLInputElement;
+
+    this.router.navigate([], {
+      queryParams: {search: value}
+    })
   }
 
 }

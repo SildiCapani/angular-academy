@@ -1,11 +1,17 @@
-const jsonServer = require('json-server')
-const server = jsonServer.create()
-const router = jsonServer.router('db.json')
-const middlewares = jsonServer.defaults()
+import express from 'express';
+import cors from 'cors';
+import getItems from "./routers/items.js"
 
-server.use(middlewares)
+const server = express();
 
-server.use(router)
+
+server.use(cors({
+  credentials: true,
+  origin: ['http://localhost:4200']
+}));
+
+server.use("/api/items", getItems);
+
 server.listen(3000, () => {
-  console.log('JSON Server is running')
-})
+  console.log('JSON Server is running');
+});

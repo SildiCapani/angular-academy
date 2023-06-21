@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Item } from '../shared/models/Item';
 import { ItemService } from '../services/Item/item.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { debounceTime, map, Subject } from 'rxjs';
+import { debounceTime, filter, map, Observable, Subject } from 'rxjs';
 import { SearchService } from '../services/search/search.service';
 import { CartService } from '../services/cart/cart.service';
 
@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   nothingFound: boolean = false;
 
 
-  constructor(private itemService: ItemService, private searchService: SearchService, private route: ActivatedRoute,private cartService: CartService, private router: Router) {
+  constructor(private itemService: ItemService, private searchService: SearchService, private route: ActivatedRoute,private cartService: CartService) {
   
   }
   
@@ -29,18 +29,34 @@ export class HomeComponent implements OnInit {
   }
 
   getSearchItem(): void {
-    this.searchService.search$
-    .pipe(debounceTime(500))
-    .subscribe(search => {
-      if (search) {
-        this.itemService.getItems().subscribe(items => {
-          this.items = items.filter(item => item.name.toLowerCase().includes(search.toLowerCase()));
-          this.items.length == 0? this.nothingFound = true : this.nothingFound = false; console.log(this.nothingFound)
-        });
-      } else {
-        this.getItemData();
-      }
+    this.searchByInput();
+    this.searchByTag();
+  }
 
+  addToCart(item: Item): void {
+    this.cartService.addToCart(item);
+  }
+
+  resetSearch(): void {
+    
+  }
+
+  searchByInput(): void {
+    this.route.queryParamMap.subscribe(paramMap => {
+      const search: string = paramMap.get('search') || ''; // Get the search parameter or set it as an empty string if it's null
+      
+      this.itemService.getItems().subscribe(searchedItems => {
+        if (search.trim() !== '') {
+          this.items = searchedItems.filter(item => item.name.toLocaleLowerCase().includes(search.toLocaleLowerCase()));
+        } else {
+          this.items = searchedItems;
+        }
+      });
+    });
+  }
+
+  searchByTag(): void{
+    this.itemService.getItems().subscribe(searchByTag => {
       this.route.params.subscribe(params => {
         if(params['tag']) {
           this.itemService.getItems().subscribe(items => {
@@ -48,12 +64,7 @@ export class HomeComponent implements OnInit {
           });
         }
       })
-    });
-  }
-
-  addToCart(item: Item): void {
-    this.cartService.addToCart(item);
-    this.router.navigateByUrl('/cart-page')
+    })
   }
   
 

@@ -26,12 +26,13 @@
                     {{item.price | currency}}
                 </div>
                 <div >
-                    <button class="add-cart" routerLink="/cart-page" (click)="addToCart(item)">Add to cart</button>
+                    <button class="add-cart" (click)="addToCart(item)">Add to cart</button>
                 </div>
             </div>
         </a>
     </li>
 </ul>
-<ng-container *ngIf="nothingFound" class="nothing-found">
-    <h2>Nothing Found</h2>
-</ng-container>
+<div *ngIf="nothingFound" class="nothing-found">
+    Nothing Found
+    <a (click)="resetSearch()">Reset Search</a>
+</div>
