@@ -9,8 +9,11 @@ import { ItemComponent } from './item/item.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SearchComponent } from './search/search.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TagsComponent } from './tags/tags.component';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 @NgModule({
   declarations: [
@@ -22,12 +25,20 @@ import { TagsComponent } from './tags/tags.component';
     PageNotFoundComponent,
     SearchComponent,
     TagsComponent,
+    LoginPageComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass:'toast-bottom-rigth',
+      newestOnTop: false
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -8,8 +8,13 @@ a{
     color:#af1313;
    
 
+    &.active{
+      background: #e72929;
+      color: white;
+    }
+
     &:hover{
-    background: #e72929;
+    background: #f38484;
     color: white;
   }
 

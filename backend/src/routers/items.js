@@ -4,17 +4,7 @@ import { readFileSync } from 'fs';
 const rawData = readFileSync('./db.json', 'utf-8');
 const db = JSON.parse(rawData);
 
-const router = express.Router()
-
-// const storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//       cb(null, '../client/public/upload')
-//     },
-//     filename: function (req, file, cb) {
-//       cb(null,  Date.now()+file.originalname)
-//     }
-//   })
-//   const upload = multer({ storage });
+const router = express.Router();
 
 const getItems = (req, res) => {
     res.json(db.items);

@@ -1,4 +1,21 @@
 {
+    "users": [
+      {
+        "id": 1,
+        "name": "Brisild Capani",
+        "email": "sildi.capani@gmail.com",
+        "password": "sildisildi",
+        "isAdmin": true
+      },
+      {
+        "id": 2,
+        "name": "Adrian Herrmann",
+        "email": "sildi.4444@gmail.com",
+        "password": "sildi.sildi",
+        "isAdmin": false
+      }
+    ],
+
     "items":[
         {
           "id": 1,

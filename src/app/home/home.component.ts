@@ -73,7 +73,7 @@ export class HomeComponent implements OnInit {
     setTimeout(() => {
       if(!this.items){
         this.nothingFound = true
-      } console.log(this.items)
+      }
     }, 1000);
   }
 
