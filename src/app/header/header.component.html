@@ -3,12 +3,12 @@
       <nav>
         <ul>
           <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
-          <li><a routerLink="/login" routerLinkActive="active">Sing in</a></li>
-          <li class="menu-container" routerLinkActive="active"><a> Name </a>
+          <li><a routerLink="/login" *ngIf="!user" routerLinkActive="active">Sing in</a></li>
+          <li *ngIf="user" class="menu-container" routerLinkActive="active"><a> {{user.name}} </a>
           <div class="menu">
             <a routerLink="/profile">Profile</a>
             <a routerLink="/orders">Orders</a>
-            <a>Logout</a>
+            <a (click)="onLogout()">Logout</a>
           </div>
         </li>
           <li><a routerLink="/cart-page" routerLinkActive="active">Cart <span *ngIf="cartQuantity">{{cartQuantity}}</span></a> 

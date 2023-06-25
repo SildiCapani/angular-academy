@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   nothingFound: boolean = false;
 
 
-  constructor(private itemService: ItemService, private searchService: SearchService, private route: ActivatedRoute,private cartService: CartService) {
+  constructor(private itemService: ItemService, private searchService: SearchService, private route: ActivatedRoute,private router: Router,private cartService: CartService) {
   
   }
   
@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
   }
 
   resetSearch(): void {
-    
+    this.router.navigateByUrl('/home')
   }
 
   searchByInput(): void {
@@ -48,6 +48,9 @@ export class HomeComponent implements OnInit {
       this.itemService.getItems().subscribe(searchedItems => {
         if (search.trim() !== '') {
           this.items = searchedItems.filter(item => item.name.toLocaleLowerCase().includes(search.toLocaleLowerCase()));
+          if(this.items.length == 0){
+            this.nothingFound = true
+          }
         } else {
           this.items = searchedItems;
         }
@@ -70,11 +73,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSearchItem();
-    setTimeout(() => {
-      if(!this.items){
-        this.nothingFound = true
-      }
-    }, 1000);
   }
 
 }

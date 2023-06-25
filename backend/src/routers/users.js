@@ -1,6 +1,8 @@
 import express, { json } from "express";
 import { readFileSync } from 'fs';
 import jwt  from "jsonwebtoken";
+import fs from 'fs';
+
 
 const rawData = readFileSync('./db.json', 'utf-8');
 const db = JSON.parse(rawData);
@@ -45,11 +47,33 @@ const generateTokenResponse = (user) => {
     return user
 }
 
-router.get("/", getUsers)
-router.get("/:id", getUser)
-// router.post("/", upload.single('file') ,addPost)
-// router.delete("/:id", deletePost)
-// router.put("/:id", upload.single('file') ,updatePost)
+const setUser = (req, res) => {
 
+    const { name, email, password } = req.body
+
+   const newUser = {
+    id: (db.users.length + 1),
+    name: name,
+    email: email.toLowerCase(),
+    password: password,
+    isAdmin: false
+   }
+
+   const user = db.users.find(u => u.email === newUser.email);
+   if (user) {
+     res.status(400).send('User already exists, please login');
+     return;
+   }
+
+   db.users.push(newUser);
+
+   fs.writeFileSync('./db.json', JSON.stringify(db, null, 2));
+
+    res.send(newUser)
+};
+
+router.get("/", getUsers);
+router.get("/:id", getUser);
+router.post('/register', setUser);
 
 export default router
