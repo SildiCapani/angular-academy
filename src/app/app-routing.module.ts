@@ -6,6 +6,7 @@ import {HomeComponent} from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterComponent } from './register/register.component';
+import { RoleGuard } from './guards/role.guard';
 
 const routes: Routes = [
   {
@@ -36,6 +37,15 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'analytics',
+    canLoad: [RoleGuard],
+    loadChildren: () => {
+      return import('./analytics/analytics.module').then(
+          mudule => mudule.AnalyticsModule
+      )
+  }
   },
   {
     path: '**',

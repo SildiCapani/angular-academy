@@ -1,4 +1,7 @@
 {
+  "sales": {
+      "sales": 44
+  },
   "users": [
     {
       "id": 1,

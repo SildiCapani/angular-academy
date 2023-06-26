@@ -19,8 +19,7 @@ export class ItemService {
     this.itemUrl = `${this.url}/api/items`
    }
 
-  getItems(search?: string):  Observable<Item[]> {
-    
+  getItems():  Observable<Item[]> {
     return this.httpClient.get<Item[]>(this.itemUrl)
   }
 

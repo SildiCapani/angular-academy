@@ -9,3 +9,7 @@ export interface Item{
     origins:string[];
     cookTime:string;
 }
+
+export interface Analytics{
+    sales: number
+}

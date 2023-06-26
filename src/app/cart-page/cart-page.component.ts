@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Cart } from '../shared/models/Cart';
 import { CartService } from '../services/cart/cart.service';
 import { CartItem } from '../shared/models/CartItem';
+import { ItemService } from '../services/Item/item.service';
+import { AnalysisService } from '../analytics/analysis.service';
 
 @Component({
   selector: 'app-cart-page',
@@ -13,7 +15,7 @@ import { CartItem } from '../shared/models/CartItem';
 export class CartPageComponent implements OnInit {
  cart!: Cart;
 
-  constructor(private cartService: CartService) {
+  constructor(private cartService: CartService,private analysisService: AnalysisService) {
     this.cartService.getCartObservable().subscribe(cart => {
       this.cart = cart
     })
@@ -30,5 +32,9 @@ export class CartPageComponent implements OnInit {
   changeQuantity(cartItem: CartItem, quantityInString: string): void {
     const quantity = parseInt(quantityInString);
     this.cartService.changeQuantity(cartItem.item.id, quantity);
+  }
+
+  addSale(amount: number): void {
+    this.analysisService.addSale(amount)
   }
 }

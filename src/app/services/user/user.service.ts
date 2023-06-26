@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Data } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { IUserLogin, IUserRegister, User } from 'src/app/shared/models/User';
@@ -26,7 +27,7 @@ export class UserService {
     this.userUrl = `${environment.baseUrl}/api/users`;
     this.userLogin = `${this.userUrl}/login`;
     this.userRegister = `${this.userUrl}/register`
-    this.userObservable = this.user$.asObservable()
+    this.userObservable = this.user$.asObservable();
    }
 
   getUsers(): Observable<User[]> {

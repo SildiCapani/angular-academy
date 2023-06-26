@@ -14,7 +14,7 @@ import { TagsComponent } from './tags/tags.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RegisterComponent } from './register/register.component'
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,7 @@ import { RegisterComponent } from './register/register.component'
     SearchComponent,
     TagsComponent,
     LoginPageComponent,
-    RegisterComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
