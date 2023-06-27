@@ -11,5 +11,6 @@ export interface Item{
 }
 
 export interface Analytics{
-    sales: number
+    sales: number,
+    earnings: number
 }

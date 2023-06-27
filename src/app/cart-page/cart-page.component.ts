@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Cart } from '../shared/models/Cart';
 import { CartService } from '../services/cart/cart.service';
 import { CartItem } from '../shared/models/CartItem';
-import { ItemService } from '../services/Item/item.service';
 import { AnalysisService } from '../analytics/analysis.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-cart-page',
@@ -13,16 +15,17 @@ import { AnalysisService } from '../analytics/analysis.service';
 
 
 export class CartPageComponent implements OnInit {
- cart!: Cart;
+ 
+  cart!: Cart;
 
-  constructor(private cartService: CartService,private analysisService: AnalysisService) {
+  constructor(private cartService: CartService,private analysisService: AnalysisService,private router: Router,private toastrService: ToastrService) {
     this.cartService.getCartObservable().subscribe(cart => {
       this.cart = cart
     })
   }
 
   ngOnInit(): void {
-    
+
   }
 
   removeFromCart(cartItem: CartItem): void {
@@ -34,7 +37,13 @@ export class CartPageComponent implements OnInit {
     this.cartService.changeQuantity(cartItem.item.id, quantity);
   }
 
-  addSale(amount: number): void {
-    this.analysisService.addSale(amount)
+  addSale(sales: number, earnings: number): void {
+    this.analysisService.addSale(sales, earnings).pipe(
+      tap({
+        next: () => {
+          this.cartService.clearCart(); 
+          this.router.navigateByUrl('home') }
+    }))
+    .subscribe();
   }
 }

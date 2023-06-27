@@ -1,0 +1,21 @@
+<form [formGroup]="itemForm">
+
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" formControlName="name" value="{{item?.name}}"><br>
+
+    <label for="cookTime">Cook Time:</label>
+    <input type="text" name="name" id="cookTime" formControlName="cookTime" value="{{item?.cookTime}}"><br>
+
+    <label for="price">Price:</label>
+    <input type="number" name="price" id="price" formControlName="price" value="{{item?.price}}"><br>
+
+    <label for="tag">Tags:</label>
+    <div formArrayName="tags">
+        <div *ngFor="let tag of item?.tags; let i = index;">
+          <input type="text" [formControlName]="i" [value]="tag">
+          <button type="button" (click)="removeTag(i)">Remove</button>
+        </div>
+      </div>
+    <button (click)="addTag()">Add Tag</button>
+
+</form>

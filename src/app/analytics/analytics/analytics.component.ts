@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AnalysisService } from '../analysis.service';
-import { Analytics } from 'src/app/shared/models/Item';
+import { Analytics, Item } from 'src/app/shared/models/Item';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { User } from 'src/app/shared/models/User';
 
 @Component({
   selector: 'app-analytics',
@@ -14,6 +15,8 @@ import { HttpClient } from '@angular/common/http';
 export class AnalyticsComponent implements OnInit {
   
   sales?: Analytics;
+  users?: User[];
+  items!: Item[]; 
   
   constructor(private httpClient: HttpClient,private analysisService: AnalysisService) { 
 
@@ -23,8 +26,18 @@ export class AnalyticsComponent implements OnInit {
     this.analysisService.getSale().subscribe(sales => this.sales = sales)
   }
 
+  getUsers(): void {
+    this.analysisService.getUsers().subscribe(users => this.users = users)
+  }
+
+  getItems(): void {
+    this.analysisService.getItems().subscribe(items => this.items = items)
+  }
+
   ngOnInit(): void {
     this.getSales();
+    this.getUsers();
+    this.getItems();
   }
 
 }

@@ -4,6 +4,7 @@ import { AnalyticsComponent } from './analytics/analytics.component';
 import { AnalyticsRoutingModule } from './analytics-routing.module';
 import { AnalysisService } from './analysis.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -17,7 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule
   ],
   providers: [
-    AnalysisService
+    AnalysisService,
+    ReactiveFormsModule
   ]
 })
 export class AnalyticsModule { }
