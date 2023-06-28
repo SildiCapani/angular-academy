@@ -14,57 +14,85 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Valida
 export class ItemComponent implements OnInit {
 
   id: string ='';
-  item?: Item;
+  item!: Item;
   itemForm!: FormGroup
 
   constructor(private analysisService: AnalysisService, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder) {
-    this.itemForm = new FormGroup({
-      name: new FormControl('', Validators.required),
-      cookTime: new FormControl('', Validators.required),
-      price: new FormControl('', Validators.required),
+    this.itemForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      cookTime: ['', Validators.required],
+      price: ['', Validators.required],
+      origins: this.formBuilder.array([]),
       tags: this.formBuilder.array([])
-    })
-  }
-  
-
-  tagFrom(): FormGroup {
-    return this.formBuilder.group({
-      tag: ['', Validators.required]
     });
   }
+  
+  getTagsArray(): FormArray {
+    return this.itemForm.get('tags') as FormArray
+  }
+
+  getOriginsArray(): FormArray {
+    return this.itemForm.get('origins') as FormArray
+  }
+
+  addTag() {
+    const origins = this.itemForm.get('tags') as FormArray;
+    origins.push(new FormControl('', Validators.required));
+  }
+
+  addOrigin() {
+    const origins = this.itemForm.get('origins') as FormArray;
+    origins.push(new FormControl('', Validators.required));
+  }
+
+  removeTag(index: number) {
+    const origins = this.itemForm.get('tags') as FormArray;
+    origins.removeAt(index);
+  }
+
+  removeOrigin(index: number) {
+    const origins = this.itemForm.get('origins') as FormArray;
+    origins.removeAt(index);
+  }
+
+  setTags(tags: string[]) {
+    const tagsArray = this.itemForm.get('tags') as FormArray;
+    tags.forEach(tag => tagsArray.push(this.formBuilder.control(tag)));
+  }
+
+  setOrigins(origins: string[]) {
+    const originsArray = this.itemForm.get('origins') as FormArray;
+    origins.forEach(origin => originsArray.push(this.formBuilder.control(origin)));
+  }
+
+  setFormValues() {
+    if (this.item) {
+      this.itemForm.patchValue({
+        name: this.item.name,
+        cookTime: this.item.cookTime,
+        price: this.item.price,
+      });
+
+      this.setOrigins(this.item.origins);
+      this.setTags(this.item.tags);
+    }
+  }
+
   
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(paramMap => {
       this.id = paramMap.get('id') as string
-      this.analysisService.getItemById(+this.id).subscribe(item => this.item = item )
-    })
-
+      this.analysisService.getItemById(+this.id).subscribe(item => { this.item = item; this.setFormValues();})
+      
+    });
     
   }
-
-  get tags(): FormArray {
-    return this.itemForm.get('tags') as FormArray;
-  }
-
-  getTagsControls(): AbstractControl[] {
-    return (this.itemForm.get('tags') as FormArray).controls;
-  }
-
-
-  addTag(): void {
-    this.tags.push(this.formBuilder.control(''));
-  }
-  
-
-  removeTag(index: number): void {
-    this.tags.removeAt(index);
-  }
-
   
   saveItem(): void {
-    if (this.itemForm.valid) {
+
+    this.analysisService.updateItem(this.item.id,this.itemForm.value).subscribe()
       // Perform save operation or update API with this.itemForm.value
       console.log(this.itemForm.value);
-    }
+    
   }
 }

@@ -41,7 +41,8 @@
       "price": 10,
       "favorite": false,
       "origins": [
-        "italy"
+        "italy",
+        "Neapel"
       ],
       "imageUrl": "/assets/images/food-1.jpg",
       "tags": [
@@ -75,7 +76,7 @@
       "favorite": false,
       "origins": [
         "germany",
-        "us"
+        "usa"
       ],
       "imageUrl": "/assets/images/food-3.jpg",
       "tags": [

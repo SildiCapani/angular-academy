@@ -48,9 +48,34 @@ const getItem = (req, res) => {
     }
 }
 
+const updateItem = (req, res) => {
+    const itemId = parseInt(req.params.id);
+  const updatedItem = req.body;
+
+
+   const item = db.items.find((item) => item.id === itemId);
+
+   if (!item) {
+     res.status(404).json({ error: 'Item not found' });
+     return;
+   }
+
+   item.name = updatedItem.name;
+   item.cookTime = updatedItem.cookTime;
+   item.price = updatedItem.price;
+   item.origins = updatedItem.origins
+   item.tags = updatedItem.tags
+
+   fs.writeFileSync('./db.json', JSON.stringify(db, null, 2));
+
+   res.json(item);
+console.log(itemId, updatedItem, item)
+}
+
 router.get("/", getItems)
 router.get("/sales", getSales)
 router.get("/:id", getItem)
+router.put("/:id", updateItem)
 router.put("/totalsales", addSales)
 
 

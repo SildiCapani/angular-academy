@@ -1,21 +1,29 @@
-<form [formGroup]="itemForm">
+<form [formGroup]="itemForm" (ngSubmit)="saveItem()">
 
     <label for="name">Name:</label>
-    <input type="text" name="name" id="name" formControlName="name" value="{{item?.name}}"><br>
+    <input type="text" name="name" id="name" formControlName="name"><br>
 
     <label for="cookTime">Cook Time:</label>
-    <input type="text" name="name" id="cookTime" formControlName="cookTime" value="{{item?.cookTime}}"><br>
+    <input type="text" name="name" id="cookTime" formControlName="cookTime" ><br>
 
     <label for="price">Price:</label>
-    <input type="number" name="price" id="price" formControlName="price" value="{{item?.price}}"><br>
+    <input type="number" name="price" id="price" formControlName="price"><br><br>
+ 
+    <div formArrayName="origins">Origins:<br>
+      <label *ngFor="let control of getOriginsArray().controls; let i = index">
+        Origin {{ i + 1 }}: 
+        <input type="text" [formControlName]="i"><button (click)="removeOrigin(i)">Remove</button>
+      <br/></label>
+    </div><button (click)="addOrigin()">Add Origin</button><br><br>
 
-    <label for="tag">Tags:</label>
-    <div formArrayName="tags">
-        <div *ngFor="let tag of item?.tags; let i = index;">
-          <input type="text" [formControlName]="i" [value]="tag">
-          <button type="button" (click)="removeTag(i)">Remove</button>
+    <div formArrayName="tags">Tags:<br>
+    <label for="tag"  *ngFor="let control of getTagsArray().controls; let i = index" >
+        Tag {{ i + 1 }}:
+          <input type="text" [formControlName]="i"><button type="button" (click)="removeTag(i)">Remove</button>
+      <br/></label>
+          
         </div>
-      </div>
-    <button (click)="addTag()">Add Tag</button>
+    <button (click)="addTag()">Add Tag</button><br/><br>
 
+    <button type="submit">Submit</button>
 </form>

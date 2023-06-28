@@ -42,6 +42,10 @@ export class AnalysisService {
       })
     )
   }
+
+  updateItem(id: number,itemForm: Item): Observable<Item> {
+    return this.httpClient.put<Item>(`${this.url}/items/${id}`, itemForm)
+  }
   
   getItems(): Observable<Item[]>{
     return this.httpClient.get<Item[]>(`${this.url}/items`)
