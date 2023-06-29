@@ -69,7 +69,6 @@ const updateItem = (req, res) => {
    fs.writeFileSync('./db.json', JSON.stringify(db, null, 2));
 
    res.json(item);
-console.log(itemId, updatedItem, item)
 }
 
 router.get("/", getItems)
