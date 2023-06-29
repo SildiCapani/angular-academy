@@ -1,7 +1,7 @@
 {
   "sales": {
-    "sales": 51,
-    "earnings": 250
+    "sales": 17,
+    "earnings": 275
   },
   "users": [
     {
@@ -20,7 +20,7 @@
     },
     {
       "id": 3,
-      "name": "Sildi",
+      "name": "Sildi Capani",
       "email": "sildi.tcapani@gmail.com",
       "password": "sildisildi",
       "isAdmin": false
@@ -112,7 +112,8 @@
       "imageUrl": "/assets/images/food-5.jpg",
       "tags": [
         "SlowFood",
-        "Soup"
+        "Soup",
+        "Vegan"
       ]
     },
     {
@@ -128,7 +129,24 @@
       "tags": [
         "FastFood",
         "Pizza",
-        "Lunch"
+        "Lunch",
+        "Vegan"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Souvlaki",
+      "price": 10,
+      "cookTime": "5-10",
+      "favorite": true,
+      "origins": [
+        "Greece",
+        "Santorini"
+      ],
+      "imageUrl": "/assets/images/food-7.jpg",
+      "tags": [
+        "FastFood",
+        "Fry"
       ]
     }
   ]

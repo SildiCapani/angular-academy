@@ -13,9 +13,9 @@
     <div formArrayName="origins">Origins:<br>
       <label *ngFor="let control of getOriginsArray().controls; let i = index">
         Origin {{ i + 1 }}: 
-        <input type="text" [formControlName]="i"><button (click)="removeOrigin(i)">Remove</button>
+        <input type="text" [formControlName]="i"><button type="button" (click)="removeOrigin(i)">Remove</button>
       <br/></label>
-    </div><button (click)="addOrigin()">Add Origin</button><br><br>
+    </div><button type="button" (click)="addOrigin()">Add Origin</button><br><br>
 
     <div formArrayName="tags">Tags:<br>
     <label for="tag"  *ngFor="let control of getTagsArray().controls; let i = index" >
@@ -24,7 +24,7 @@
       <br/></label>
           
         </div>
-    <button (click)="addTag()">Add Tag</button><br/><br>
+    <button type="button" (click)="addTag()">Add Tag</button><br/><br>
 
     <button type="submit">Submit</button>
 </form>

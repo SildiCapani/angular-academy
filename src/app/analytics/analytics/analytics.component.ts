@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AnalysisService } from '../analysis.service';
 import { Analytics, Item } from 'src/app/shared/models/Item';
-import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { User } from 'src/app/shared/models/User';
+import { MatTableDataSource } from '@angular/material/table';
+
 
 @Component({
   selector: 'app-analytics',
@@ -16,18 +17,21 @@ export class AnalyticsComponent implements OnInit {
   
   sales?: Analytics;
   users?: User[];
-  items!: Item[]; 
+  items?: Item[];
+  dataSource: MatTableDataSource<User> = new MatTableDataSource<User>();
   
   constructor(private httpClient: HttpClient,private analysisService: AnalysisService) { 
 
    }
+
+   displayedColumns: string[] = ['id', 'name', 'email', 'isAdmin'];
   
   getSales(): void {
     this.analysisService.getSale().subscribe(sales => this.sales = sales)
   }
 
   getUsers(): void {
-    this.analysisService.getUsers().subscribe(users => this.users = users)
+    this.analysisService.getUsers().subscribe(users => {this.users = users, this.dataSource.data = users;})
   }
 
   getItems(): void {

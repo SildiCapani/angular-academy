@@ -19,8 +19,6 @@ const getSales = (req, res) => {
 }
 
 const addSales = (req, res) => {
-    console.log(db.sales.sales); // Check the content of req.body in the console
-
   const { sales, earnings } = req.body;
 
   if (typeof sales !== 'number') {
@@ -30,7 +28,6 @@ const addSales = (req, res) => {
 
   db.sales.sales += sales;
   db.sales.earnings += earnings
-  // Write the updated db object back to the JSON file
   fs.writeFileSync('./db.json', JSON.stringify(db, null, 2));
 
  
@@ -73,9 +70,9 @@ const updateItem = (req, res) => {
 
 router.get("/", getItems)
 router.get("/sales", getSales)
+router.put("/totalsales", addSales)
 router.get("/:id", getItem)
 router.put("/:id", updateItem)
-router.put("/totalsales", addSales)
 
 
 export default router

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AnalysisService } from '../../analysis.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Item } from 'src/app/shared/models/Item';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-item',
@@ -15,9 +16,13 @@ export class ItemComponent implements OnInit {
 
   id: string ='';
   item!: Item;
-  itemForm!: FormGroup
+  itemForm!: FormGroup;
 
-  constructor(private analysisService: AnalysisService, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder) {
+  constructor(
+    private analysisService: AnalysisService,
+    private activatedRoute: ActivatedRoute, 
+    private formBuilder: FormBuilder,
+    private router: Router) {
     this.itemForm = this.formBuilder.group({
       name: ['', Validators.required],
       cookTime: ['', Validators.required],
@@ -83,16 +88,15 @@ export class ItemComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(paramMap => {
       this.id = paramMap.get('id') as string
       this.analysisService.getItemById(+this.id).subscribe(item => { this.item = item; this.setFormValues();})
-      
     });
     
   }
   
   saveItem(): void {
+    this.analysisService.updateItem(this.item.id,this.itemForm.value).subscribe(() => {
+    this.router.navigateByUrl('/analytics');
+  })
+ 
 
-    this.analysisService.updateItem(this.item.id,this.itemForm.value).subscribe()
-      // Perform save operation or update API with this.itemForm.value
-      console.log(this.itemForm.value);
-    
   }
 }

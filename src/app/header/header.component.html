@@ -6,8 +6,6 @@
           <li><a routerLink="/login" *ngIf="!user" routerLinkActive="active">Sing in</a></li>
           <li *ngIf="user" class="menu-container" routerLinkActive="active"><a> {{user.name}} </a>
           <div class="menu">
-            <a routerLink="/profile">Profile</a>
-            <a routerLink="/orders">Orders</a>
             <a (click)="onLogout()">Logout</a>
           </div>
         </li>

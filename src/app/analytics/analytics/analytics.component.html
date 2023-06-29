@@ -1,15 +1,54 @@
-<h2>
-    Total sales: {{sales?.sales}} <br/>
-    Total Earnings: {{sales?.earnings | currency}}
-</h2><hr>
+<div class="sales">
+    <h2>Total sales: <span>{{sales?.sales}}</span></h2> <br/>
+    <h2>Total Earnings: <span>{{sales?.earnings | currency}}</span></h2>
+</div>
+<hr>
+
+<h2>Total users: <span>{{users?.length}}</span> </h2>
+
+<div class="table">
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID.</th>
+        <td mat-cell *matCellDef="let element">{{element.id}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name.</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email.</th>
+        <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="isAdmin">
+        <th mat-header-cell *matHeaderCellDef>Is Admin.</th>
+        <td mat-cell *matCellDef="let element">{{ element.isAdmin }}</td>
+      </ng-container>
 
 
-<h2>Total users: {{users?.length}} </h2>
-<div *ngFor="let user of users">
-    <p>{{user.name}}</p>
-    <p>{{user.email}}</p><hr>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
 </div>
 
-<div *ngFor="let item of items">
-    <a routerLink="item/{{item.id}}">{{item.name}}</a>
+<h2>Total items: <span>{{items?.length}}</span> </h2>
+
+<div class="container">
+  <ul>
+    <li *ngFor="let item of items" routerLink="item/{{item.id}}">
+      <div>
+        <img [src]="item.imageUrl">
+      </div>
+
+      <div>
+        <p>{{item.name}}</p>
+      </div>
+      
+    </li>
+  </ul>
+    
 </div>

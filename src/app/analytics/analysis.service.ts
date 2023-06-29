@@ -44,7 +44,11 @@ export class AnalysisService {
   }
 
   updateItem(id: number,itemForm: Item): Observable<Item> {
-    return this.httpClient.put<Item>(`${this.url}/items/${id}`, itemForm)
+    return this.httpClient.put<Item>(`${this.url}/items/${id}`, itemForm).pipe(
+      tap({ next: (() => {
+        this.toastrService.success("Updated Successfuly", 'Update successful')
+      }) })
+    )
   }
   
   getItems(): Observable<Item[]>{
