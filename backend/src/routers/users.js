@@ -72,8 +72,29 @@ const setUser = (req, res) => {
     res.send(newUser)
 };
 
+const likeItem = (req, res) => {
+   const { itemId, userId } = req.body
+
+  const user = db.users.find((user) => user.id === userId);
+
+  const index = user.liked.indexOf(itemId);
+
+  if(user.liked.includes(itemId)) {
+    user.liked.splice(index, 1);
+  } else {
+    user.liked.push(itemId);
+  }
+  
+  fs.writeFileSync('./db.json', JSON.stringify(db, null, 2));
+
+  res.json(user)
+  console.log(itemId, userId)
+  
+}
+
 router.get("/", getUsers);
 router.get("/:id", getUser);
+router.put('/liked', likeItem);
 router.post('/register', setUser);
 
 export default router

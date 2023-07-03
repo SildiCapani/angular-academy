@@ -1,8 +1,13 @@
 <div class="sales">
-    <h2>Total sales: <span>{{sales?.sales}}</span></h2> <br/>
+    <h2>Total sales: <span>{{sales?.quantity}}</span></h2> <br/>
+    
     <h2>Total Earnings: <span>{{sales?.earnings | currency}}</span></h2>
 </div>
 <hr>
+
+<div class="chart">
+  <canvas #myChart></canvas>
+</div>
 
 <h2>Total users: <span>{{users?.length}}</span> </h2>
 
@@ -34,6 +39,8 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 </div>
+
+<div class="heigth"></div>
 
 <h2>Total items: <span>{{items?.length}}</span> </h2>
 

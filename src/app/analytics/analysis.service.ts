@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { Analytics, Item } from '../shared/models/Item';
 import { User } from '../shared/models/User';
 import { ToastrService } from 'ngx-toastr';
+import { CartItem } from '../shared/models/CartItem';
 
 @Injectable({
   providedIn: 'root'
@@ -27,10 +28,10 @@ export class AnalysisService {
     return this.httpClient.get<Analytics>(this.salesUrl)
   }
 
-  addSale(sales: number,earnings: number): Observable<Analytics> {
-    return this.httpClient.put<Analytics>(this.addsalesUrl, { sales, earnings }).pipe(
+  addSale(earnings: number,sales: CartItem[]): Observable<Analytics> {
+    return this.httpClient.put<Analytics>(this.addsalesUrl, { earnings, sales }).pipe(
       tap({
-        next: (sale) => {
+        next: () => {
           this.toastrService.success(
             `Purchase Successful`,
             'Purchase Successful'

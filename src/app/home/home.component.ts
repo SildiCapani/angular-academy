@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime, filter, map, Observable, Subject } from 'rxjs';
 import { SearchService } from '../services/search/search.service';
 import { CartService } from '../services/cart/cart.service';
+import { UserService } from '../services/user/user.service';
+import { User } from '../shared/models/User';
 
 @Component({
   selector: 'app-home',
@@ -17,9 +19,10 @@ export class HomeComponent implements OnInit {
 
   items: Item[] = [];
   nothingFound: boolean = false;
+  currentUser?: User;
 
 
-  constructor(private itemService: ItemService, private searchService: SearchService, private route: ActivatedRoute,private router: Router,private cartService: CartService) {
+  constructor(private itemService: ItemService,private userService: UserService, private route: ActivatedRoute,private router: Router,private cartService: CartService) {
   
   }
   
@@ -37,8 +40,24 @@ export class HomeComponent implements OnInit {
     this.cartService.addToCart(item);
   }
 
+  getUser(): void {
+    this.userService.userObservable.subscribe(user => this.currentUser = user)
+  }
+
   resetSearch(): void {
     this.router.navigateByUrl('/home')
+  }
+
+  likeItem(itemId: number, userId?: number): void {
+    const likedIndex = this.currentUser?.liked.indexOf(itemId);
+    
+      if(userId){
+      this.userService.likeItem(itemId, userId).subscribe()
+      
+    } else {
+      // Item is already liked, remove it from the liked array
+      // this.currentUser?.liked.splice(likedIndex, 1);
+    }
   }
 
   searchByInput(): void {
@@ -73,6 +92,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSearchItem();
+    this.getUser();
   }
 
 }

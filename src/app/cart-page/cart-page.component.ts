@@ -6,6 +6,7 @@ import { AnalysisService } from '../analytics/analysis.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs';
+import { Item } from '../shared/models/Item';
 
 @Component({
   selector: 'app-cart-page',
@@ -37,13 +38,16 @@ export class CartPageComponent implements OnInit {
     this.cartService.changeQuantity(cartItem.item.id, quantity);
   }
 
-  addSale(sales: number, earnings: number): void {
-    this.analysisService.addSale(sales, earnings).pipe(
-      tap({
-        next: () => {
-          this.cartService.clearCart(); 
-          this.router.navigateByUrl('home') }
-    }))
-    .subscribe();
+  addSale(earnings: number, ids: CartItem[]): void {
+    const idList = ids.map((element: CartItem) => element.item.id);
+
+     this.analysisService.addSale(earnings, ids).pipe(
+       tap({
+         next: () => {
+           this.cartService.clearCart(); 
+           this.router.navigateByUrl('home') }
+     }))
+     .subscribe();
+    console.log(earnings, idList, ids)
   }
 }

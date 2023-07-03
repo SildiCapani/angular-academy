@@ -18,6 +18,7 @@ export class UserService {
   private readonly userUrl: string;
   private readonly userLogin: string;
   private readonly userRegister: string;
+  private readonly userLiked: string;
 
   user!: User;
   private user$ = new BehaviorSubject<User>(this.getUserFromLocaleStorage())
@@ -26,7 +27,9 @@ export class UserService {
   constructor(private httpClient: HttpClient, private toastrService: ToastrService) { 
     this.userUrl = `${environment.baseUrl}/api/users`;
     this.userLogin = `${this.userUrl}/login`;
-    this.userRegister = `${this.userUrl}/register`
+    this.userRegister = `${this.userUrl}/register`;
+    this.userLiked = `${this.userUrl}/liked`
+
     this.userObservable = this.user$.asObservable();
    }
 
@@ -77,6 +80,21 @@ export class UserService {
       window.location.reload();
     }, 400); 
   }
+
+  likeItem(itemId: number, userId: number): Observable<User> {
+    return this.httpClient.put<User>(this.userLiked, { itemId, userId }).pipe(
+      tap({
+        next: (user) => {
+          this.setUserToLocaleStorage(user)
+          this.user$.next(user);
+          this.toastrService.success(
+            "Thank you for your feedback"
+          )
+        }
+      })
+    )
+  }
+
 
   private setUserToLocaleStorage(user: User): void {
     localStorage.setItem(this.USER_KEY, JSON.stringify(user))

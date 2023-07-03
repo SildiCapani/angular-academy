@@ -4,6 +4,7 @@
     text-align: center;
     width: 100%;
     gap: 3rem;
+    padding-top: 2rem;
 }
 
 h2{
@@ -14,9 +15,18 @@ span{
         color: green;
 }
 
+.chart{
+    width: 70%;
+    margin-left: 12%;
+}
+
 .table {
     width:70%;
     margin-left: 15%;
+}
+
+.heigth{
+    height: 5rem;
 }
 
 .container {

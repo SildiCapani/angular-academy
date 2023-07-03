@@ -19,14 +19,21 @@ const getSales = (req, res) => {
 }
 
 const addSales = (req, res) => {
-  const { sales, earnings } = req.body;
+  const { earnings ,sales  } = req.body;
+  
 
-  if (typeof sales !== 'number') {
-    res.status(400).json({ error: 'Invalid sales amount' });
-    return;
-  }
+  sales.forEach((sale) => {
+    const itemName = sale.item.name;
+    const quantity = sale.quantity;
+    const price = sale.price;
 
-  db.sales.sales += sales;
+    console.log(itemName, quantity, price)
+  
+    db.sales.sales[itemName].quantity += quantity;
+    db.sales.sales[itemName].sales += price;
+    db.sales.quantity += quantity;
+  });
+
   db.sales.earnings += earnings
   fs.writeFileSync('./db.json', JSON.stringify(db, null, 2));
 
