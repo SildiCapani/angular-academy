@@ -6,7 +6,6 @@ import { AnalysisService } from '../analytics/analysis.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs';
-import { Item } from '../shared/models/Item';
 
 @Component({
   selector: 'app-cart-page',

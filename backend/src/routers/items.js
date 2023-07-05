@@ -27,7 +27,6 @@ const addSales = (req, res) => {
     const quantity = sale.quantity;
     const price = sale.price;
 
-    console.log(itemName, quantity, price)
   
     db.sales.sales[itemName].quantity += quantity;
     db.sales.sales[itemName].sales += price;

@@ -49,14 +49,10 @@ export class HomeComponent implements OnInit {
   }
 
   likeItem(itemId: number, userId?: number): void {
-    const likedIndex = this.currentUser?.liked.indexOf(itemId);
     
       if(userId){
       this.userService.likeItem(itemId, userId).subscribe()
       
-    } else {
-      // Item is already liked, remove it from the liked array
-      // this.currentUser?.liked.splice(likedIndex, 1);
     }
   }
 

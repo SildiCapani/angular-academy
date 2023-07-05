@@ -88,8 +88,6 @@ const likeItem = (req, res) => {
   fs.writeFileSync('./db.json', JSON.stringify(db, null, 2));
 
   res.json(user)
-  console.log(itemId, userId)
-  
 }
 
 router.get("/", getUsers);

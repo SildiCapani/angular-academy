@@ -1,23 +1,23 @@
 {
   "sales": {
-    "quantity": 47,
-    "earnings": 447,
+    "quantity": 53,
+    "earnings": 494,
     "sales": {
       "Pizza Pepperoni": {
-        "quantity": 5,
-        "sales": 50
+        "quantity": 7,
+        "sales": 70
       },
       "Meatball": {
         "quantity": 2,
         "sales": 40
       },
       "Hamburger": {
-        "quantity": 2,
-        "sales": 10
+        "quantity": 3,
+        "sales": 15
       },
       "Fried Potatoes": {
-        "quantity": 6,
-        "sales": 12
+        "quantity": 7,
+        "sales": 14
       },
       "Chicken Soup": {
         "quantity": 2,
@@ -28,8 +28,8 @@
         "sales": 18
       },
       "Souvlaki": {
-        "quantity": 5,
-        "sales": 50
+        "quantity": 7,
+        "sales": 70
       }
     }
   },
@@ -41,10 +41,10 @@
       "password": "sildisildi",
       "isAdmin": true,
       "liked": [
-        2,
         3,
         4,
-        7
+        7,
+        2
       ]
     },
     {
