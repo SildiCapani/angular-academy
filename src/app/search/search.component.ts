@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Subject } from 'rxjs';
 import { SearchService } from '../services/search/search.service';
 import { Router } from '@angular/router';
 

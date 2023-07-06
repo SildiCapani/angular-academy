@@ -8,11 +8,11 @@ import { BehaviorSubject } from 'rxjs';
 
 export class SearchService {
 
-  private searchSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
-  public search$ = this.searchSubject.asObservable();
+  private search$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  public search = this.search$.asObservable();
 
   setSearch(search: string): void {
-    this.searchSubject.next(search)
+    this.search$.next(search)
   }
 
 }

@@ -139,7 +139,8 @@
       "imageUrl": "/assets/images/food-4.jpg",
       "tags": [
         "FastFood",
-        "Fry"
+        "Fry",
+        "Vegan"
       ]
     },
     {
@@ -154,8 +155,7 @@
       "imageUrl": "/assets/images/food-5.jpg",
       "tags": [
         "SlowFood",
-        "Soup",
-        "Vegan"
+        "Soup"
       ]
     },
     {
