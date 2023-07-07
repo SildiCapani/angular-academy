@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Item } from '../shared/models/Item';
 import { ItemService } from '../services/Item/item.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { debounceTime, filter, map, Observable, Subject } from 'rxjs';
-import { SearchService } from '../services/search/search.service';
 import { CartService } from '../services/cart/cart.service';
 import { UserService } from '../services/user/user.service';
 import { User } from '../shared/models/User';

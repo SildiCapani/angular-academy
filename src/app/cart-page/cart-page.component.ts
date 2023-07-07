@@ -4,7 +4,6 @@ import { CartService } from '../services/cart/cart.service';
 import { CartItem } from '../shared/models/CartItem';
 import { AnalysisService } from '../analytics/analysis.service';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs';
 
 @Component({
@@ -18,7 +17,7 @@ export class CartPageComponent implements OnInit {
  
   cart!: Cart;
 
-  constructor(private cartService: CartService,private analysisService: AnalysisService,private router: Router,private toastrService: ToastrService) {
+  constructor(private cartService: CartService,private analysisService: AnalysisService,private router: Router) {
     this.cartService.getCartObservable().subscribe(cart => {
       this.cart = cart
     })
